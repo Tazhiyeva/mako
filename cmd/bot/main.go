@@ -40,19 +40,18 @@ type User struct {
 func main() {
 	params := url.Values{}
 	params.Add("limit", "50")
-	params.Add("offset_date", "2024-06-09T00:16:46.728493%2B07:00")
-	params.Add("is_advertiser", "false")
-	params.Add("fields", "meta.providers,meta.branch_rating,meta.branch_reviews_count,meta.total_count,reviews.hiding_reason,reviews.is_verified")
-	params.Add("without_my_first_review", "false")
 	params.Add("rated", "true")
 	params.Add("sort_by", "date_edited")
 	params.Add("key", "37c04fe6-a560-4549-b459-02309cf643ad")
 	params.Add("locale", "ru_KZ")
 
-	baseURL := "https://public-api.reviews.2gis.com/2.0/branches/9429940000796245/reviews" + params.Encode()
+	baseURL := "https://public-api.reviews.2gis.com/2.0/branches/9429940000796245/reviews?" + params.Encode()
+
 	reviewClient := http.Client{
 		Timeout: time.Second * 2,
 	}
+
+	fmt.Println(baseURL)
 
 	req, err := http.NewRequest(http.MethodGet, baseURL, nil)
 	if err != nil {
